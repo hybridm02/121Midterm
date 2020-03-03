@@ -42,7 +42,7 @@ public class EndControll : MonoBehaviour
                 //EndCheck();
             }
         } else {
-            narrativeText.text = "";
+            //narrativeText.text = "";
         }
     }
     
