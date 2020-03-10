@@ -13,6 +13,8 @@ public class PlayerInteract : MonoBehaviour
     public float addTimePt;
     public float thisPosition;
 
+    public Material defaultMaterial;
+
     public Text narrativeText;
     [TextArea(15, 20)]
     public string narrative;
@@ -20,6 +22,7 @@ public class PlayerInteract : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        defaultMaterial = GetComponent<MeshRenderer>().material;
         this.gameObject.SetActive(true);
         //string narrative = "";
     }
@@ -30,26 +33,20 @@ public class PlayerInteract : MonoBehaviour
 
     }
 
-    public void Selected()
+    public void Narrative()
     {
-        //Debug.Log("Raycast selection works");
-        //currentDistPlayer = Vector3.Distance(player.transform.position, transform.position);
-
             narrativeText.text = narrative;
-        //else
-        //{
-        //    narrativeText.text = "";
-        //}
 
     }
 
     public void Interacted()
     {
-        narrativeText.text = narrative;
+        //narrativeText.text = narrative;
         //Debug.Log(narrative);
 
         player.SendMessage("AddTime", addTimePt);
         player.SendMessage("AddReadiness", addReadinessPt);
         this.gameObject.SetActive(false);
     }
+
 }

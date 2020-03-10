@@ -7,9 +7,8 @@ public class SelectionManager : MonoBehaviour
 {
     public float maxRaycastDist = 1000f;
     public Material highlightMaterial;
-    public Material defaultMaterial;
+    //public Material defaultMaterial;
 
-    //string selectableTag = "Selectable";
     private Transform _selection;
 
     public Text narrativeText;
@@ -27,8 +26,9 @@ public class SelectionManager : MonoBehaviour
         if (_selection != null)
         {
             var selectionRenderer = _selection.GetComponent<MeshRenderer>();
-            //narrativeText.text = "";
-            selectionRenderer.material = defaultMaterial;
+            narrativeText.text = "";
+            //selectionRenderer.material = defaultMaterial;
+            selectionRenderer.material = _selection.GetComponent<PlayerInteract>().defaultMaterial;
             _selection = null;
         }
 
@@ -42,23 +42,20 @@ public class SelectionManager : MonoBehaviour
             var selection = hitObject.transform;
             if (selection.CompareTag("Selectable") || selection.CompareTag("Interactable"))
             {
+                Debug.Log("mouse over this");
                 var selectionRenderer = selection.GetComponent<MeshRenderer>();
                 if (selectionRenderer != null)
                 {
                     selectionRenderer.material = highlightMaterial;
+
+                    selection.SendMessage("Narrative");
                 }
+
                 if (Input.GetMouseButton(0))
                 {
-                    //mouse 0 text, mouse 1 interact 
-                    // = keycode.E
-                    if (selection.CompareTag("Selectable"))
-                    {
-                        selection.SendMessage("Selected");
-                    }
                     if (selection.CompareTag("Interactable"))
                     {
                         selection.SendMessage("Interacted");
-                        //selection.GetComponent<PlayerInteract>().narrative;
                     }
                 }
                 _selection = selection;
