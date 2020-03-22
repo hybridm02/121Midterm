@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerControll : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class PlayerControll : MonoBehaviour
     public float mouseX, mouseY;
     public float moveSpeed = 2f;
     public Vector3 inputVector;
+
+    public Text narrativeText;
 
     void Start()
     {
@@ -31,6 +34,16 @@ public class PlayerControll : MonoBehaviour
         inputVector = transform.forward * forwardBackward;
         inputVector += transform.right * rightLeft;
         thisCharacterController.Move(inputVector * moveSpeed + (Physics.gravity * .69f));
+
+        Debug.Log(transform.position.z);
+        if(transform.position.z > 35f || transform.position.z < -20f)
+        {
+            narrativeText.text = "I wouldn't go this way";
+        }
+        else
+        {
+            narrativeText.text = "";
+        }
     }
     // PHYSICS-BASED CONTROLLER IS NO LONGER NEEEDED!
     // void FixedUpdate()
