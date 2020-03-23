@@ -14,7 +14,7 @@ public class ReadinessBar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //float readinessPt = 0f;
+        readinessPt = 0f;
         UpdateReadinessBar();
     }
 
